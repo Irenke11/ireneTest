@@ -34,12 +34,22 @@ class Players extends Model
     }
 
     public static function searchPlayerInfo($search){
-        $PlayersearchInfo = Players::where('name', 'like', '%'.$search.'%')
-                                ->orwhere('playerId', 'like', '%'.$search.'%')
-                                ->orwhere('account', 'like', '%'.$search.'%')
-                                ->orwhere('currency', 'like', '%'.$search.'%')
+
+        if(isset($search)){
+            foreach($search as $name => $value){
+                if(isset($value)){
+                    $PlayersearchInfo = Players::where($name, 'like', '%'.$value.'%')
+                    ->distinct()
+                    ->get();  
+                }
+            }
+        }else{
+        $PlayersearchInfo = Players::where('name', 'like', '%'.$search['name'].'%')
+                                ->orwhere('playerId', 'like', '%'.$search['playerId'].'%')
+                                ->orwhere('account', 'like', '%'.$search['account'].'%')
                                 ->distinct()
                                 ->get();
+        }
         return $PlayersearchInfo;
     }
 

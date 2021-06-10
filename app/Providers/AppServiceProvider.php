@@ -26,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     {
            //set app language
            app()->setLocale($request->segment(1) ?? app()->getLocale());
+        //    if(env(key:'APP_')){
+
+        //    }
      }
 }

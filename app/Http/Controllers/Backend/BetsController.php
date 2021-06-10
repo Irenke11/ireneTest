@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
-
+use App\Models\Backend\Bets;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 class BetsController extends Controller
 {
     /**
@@ -12,75 +12,36 @@ class BetsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        //
-        return view('bets');
+        $data=[];
+        // $data['gameTypeList'] = config('setting.gametype');
+        $data['searchBetsInfo'] = Bets::searchBetsInfo($request->search);
+        // $data['getAllInfo'] = Bets::getAllInfo();
+
+        return view('Backend.bets',$data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function addBet(Request $request)
     {
-        //
-    }
+        $validatedData = $request->validate([  
+            'gameId' => ['required', 'exists:gameList,codeName','string', 'max:255'],
+            'playerId' => ['required', 'exists:accountPlayer,playerId','string', 'max:255'],
+            'amount' => ['required','string', 'max:255'],
+            'payout' => ['required','string', 'max:255'],
+            'bureauNo' => ['required','string', 'max:255'],
+            'betTime' => ['required','string', 'max:255'],
+        ]);
+        $Bets = new Bets;
+        $Bets->gameId    = $request->gameId;
+        $Bets->playerId  = $request->playerId;
+        $Bets->amount    = $request->amount;
+        $Bets->payout    = $request->payout;
+        $Bets->bureauNo  = $request->bureauNo;
+        $Bets->betTime   = $request->betTime;
+        $Bets->save();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $this->index($request);
     }
 }

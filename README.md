@@ -1,7 +1,7 @@
 啟動專案 (nginx + mysql)
-docker-compose up -d nginx mysql php-worker gitlab
-docker-compose up nginx mysql php-worker
-docker-compose up -d php-worker
+docker-compose up -d nginx mysql php-worker gitlab workspace
+
+npm install -g browser-sync-webpack-plugin@^2.3.0 --save-dev --legacy-peer-deps
 進入 workspace 容器:
 docker-compose exec workspace bash
 docker-compose exec -u laradock workspace /bin/bash
@@ -105,26 +105,4 @@ Php laravel 框架（api、排程），前端搭配vue.js，資料庫使用mysql
 
 artisan schedule:run
 
-
-laradock@432da5a6cbeb:/var/www$ npm install
-npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
-npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
-npm WARN deprecated chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
-npm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
-npm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
-npm WARN deprecated popper.js@1.16.1: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
-
-added 1258 packages, and audited 1265 packages in 2m
-
-68 packages are looking for funding
-  run `npm fund` for details
-
-52 vulnerabilities (45 moderate, 7 high)
-
-To address issues that do not require attention, run:
-  npm audit fix
-
-To address all issues (including breaking changes), run:
-  npm audit fix --force
-
-Run `npm audit` for details.
+  Running: npm install vue-loader@^15.9.5 --save-dev --legacy-peer-deps

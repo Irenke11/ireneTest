@@ -74,8 +74,6 @@
                          关闭<input type="radio"  name="status" value="0">
                         <button type="submit" >go</button>
                     </form>   
-                    <br>
-                    {{ $searchGameInfo}}
                 </div>
             </div>
         </div>

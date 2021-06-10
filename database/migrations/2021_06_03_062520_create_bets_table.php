@@ -22,6 +22,9 @@ class CreateBetsTable extends Migration
             $table->string('bureauNo', 10); //局號
             $table->dateTime('betTime')->default(DB::raw('CURRENT_TIMESTAMP'));//下注時間
             $table->timestamps();
+
+            // $table->foreign('gameId')->references('codeName')->on('gameList');
+            // $table->foreign('playerId')->references('playerId')->on('accountPlayer');
         });
     }
 

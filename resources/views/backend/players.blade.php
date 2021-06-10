@@ -36,7 +36,6 @@
                         </div>
                     @endif
                     <br>
-                    {{ $getAllInfo }}
                 </div>
                 <!-- 搜寻用户 -->
 
@@ -45,10 +44,25 @@
                 <div class="card-body">
                     <form action="/POST/searchPlayers" method="POST" >
                         @csrf
-                        搜寻：
-                        <input type="text" name="search" text="请输入Id/Account/Name/Currency">
+                        搜寻playerId：
+                        <input required type="search" name="search[playerId]">
+                        <button type="submit" >go</button>
+                    </form> 
+                        <br>
+                    <form action="/POST/searchPlayers" method="POST" >
+                    @csrf
+                        搜寻account：
+                        <input required type="search" name="search[account]">
+                       <button type="submit" >go</button>
+                     </form> 
+                        <br>
+                    <form action="/POST/searchPlayers" method="POST" >
+                    @csrf
+                        搜寻name：
+                        <input required type="search" name="search[name]">
                         <button type="submit" >go</button>
                     </form>   
+                        <br>
                     {{ $searchPlayerInfo}}
                     <br>
                 </div>

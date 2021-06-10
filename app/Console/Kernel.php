@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\bets::class,
+        \App\Console\Commands\dailySettlement::class,
     ];
 
     /**
@@ -25,6 +26,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('dailySettlement')->daily()->withoutOverlapping(10);
+        $schedule->command('bets')->everyThirtyMinutes()->withoutOverlapping(10);
+
     }
 
     /**
